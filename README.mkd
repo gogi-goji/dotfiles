@@ -1,0 +1,51 @@
+dotfiles
+========
+
+Personal configuration files
+
+https://github.com/gogi-goji/dotfiles
+git@github.com:gogi-goji/dotfiles
+
+# Vim 
+=====
+Vim checks for your user's config file first in ~/.vimrc, then checks for a global one in /etc/vimrc.  In order to keep things clean and under version control, use a symbolic link.
+    `ln -s ~/dotfiles/vimrc ~/.vimrc`
+
+* Note to self: eventually, I want to get my entire vim directory under git to
+  make life way easier.  Terminally Incoherent did a post about this:
+  http://www.terminally-incoherent.com/blog/2012/03/12/putting-your-vim-files-under-version-control/
+    * Actually, this probably isn't necessary.  Vundle takes care of pretty
+      much everything for me, so all I should have to do is make a symbolic
+      link for my vimrc, install Vundle, and then issue :BundleInstall from inside
+      Vim and I'll be good to go.
+
+Plugins 
+* Vundle (takes care of all your plugins for you)
+    * https://github.com/gmarik/vundle
+    * Install vundle (as described in the README in the git repo)
+    * in Vim, run :BundleInstall, and then Vim and your .vimrc will take care
+      of everything else for you!
+
+Spell Check
+* Install vim-spell-en (installed by default on Arch) 
+* The rest is handled by my .vimrc
+
+Theme
+* Solarized 
+    * http://ethanschoonover.com/solarized
+    * my vimrc should take care of the theme thanks to Vundle.  However, when
+      I'm running Vim from a terminal (which I usually do), I need to worry
+      about my .Xresources not messing things up.  
+        * copy the colours here into your ~/.Xresources file
+          https://github.com/altercation/solarized/blob/master/xresources-colors-solarized/Xresources
+
+Using user environment with sudo
+
+* One potential problem with a quite customized setup with plugins is that your
+  editor is quite dependant on your user's environment
+* This can be worked around with sudoedit
+    * With `# visudo`, add or edit your sudoers file to include something like
+      `username ALL=(ALL) ALL,sudoedit`
+    * Then, you can edit files with sudo privileges and your own user's
+      environment with `$ sudoedit filename`.  This uses a tmp file, which it
+      then writes when you're done.  
