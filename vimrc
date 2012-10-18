@@ -67,9 +67,9 @@ Bundle 'gmarik/vundle'
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
-Bundle 'sjl/gundo.vim/'
 Bundle 'Townk/vim-autoclose'
 "Bundle 'vim-scripts/Obvious-Mode' 
+Bundle 'git://github.com/sjl/gundo.vim.git'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 " Themes:
@@ -91,7 +91,8 @@ filetype plugin indent on     " required!
 " =====================
 
 " Detect filetype
-" filetype plugin on (I think I need it off for Vundle)
+" filetype plugin on 
+" Set at the end of Vundle section
 
 " Show line numbers
 set number
@@ -107,6 +108,11 @@ if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
+" Persistent undo (new in Vim 7.3, and makes Gundo much more useful)
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories  Note: Make sure this directory exists!
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
 
 " Themes and colours
 " ==================

@@ -9,7 +9,13 @@ git@github.com:gogi-goji/dotfiles
 # Vim 
 ===== 
 
-## Getting Started
+## Getting Started 
+
+First, install gvim.  The default vim package that Arch Linux comes with is
+really lightweight, and doesn't come with a graphical version, Python support
+(needed for Gundo), X server options (no copy/paste from the clipboard), or the
+like.
+
 Vim checks for your user's config file first in ~/.vimrc, then checks for a
 global one in /etc/vimrc.  In order to keep things clean and under version
 control, use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
@@ -33,6 +39,11 @@ control, use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
       about my .Xresources not messing things up.  
     * copy the colours here into your ~/.Xresources file:
       https://github.com/altercation/solarized/blob/master/xresources-colors-solarized/Xresources
+
+## Persistent Undo
+* My .vimrc takes care of most of this, but you need to make the undo directory
+  yourself, as Vim will not do it for you.
+    `$ mkdir ~/.vim/undo`
 
 ##Using user environment with sudo
 * One potential problem with a quite customized setup with plugins is that your
