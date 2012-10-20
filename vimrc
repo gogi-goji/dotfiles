@@ -37,11 +37,43 @@ set showmode
 " Note: requires Gundo plugin (handled by Vundle, see below)
 nnoremap <F5> :GundoToggle<CR>
 
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" Start scrolling before the cursor hits the bottom/top of the page
+set scrolloff=4
+
+" Better way to move between windows (C-direction)
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 " Spell checking
 " When in insert mode, press C-l to see a menu for spell check fixes for the
 " nearest misspelled word to the left of the cursor, then press C-i to go back
 " to your last insert point.  
 " Code is in spell checking section, just described here for reference. 
+
+" Relative line numbers
+"
+" <C-n> to toggle relative vs absolute line numbers
+"
+" I'm using the plugin vim-numbertoggle for this functionality.  For more
+" information see:
+" http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+
+" NerdCommenter
+" 
+" [count]<leader>c<space> to toggle comments on and off.
+" <leader>c$ Comments the current line from the cursor to the EOL
+" <leader>cA Insert a comment and go into insert mode at the end of the line
+"
+" There's a bunch of other useful commands this plugin comes with, but that's
+" the one I use the most.  For more information, see:
+" https://github.com/scrooloose/nerdcommenter
+" http://www.vim.org/scripts/script.php?script_id=1218
 
 
 " Plugins
@@ -53,7 +85,7 @@ nnoremap <F5> :GundoToggle<CR>
 " mess around with all of that yourself.  See the Github repo for more
 " specific information.  The following stuff is all Vundle configuration
 " stuff.
-set nocompatible               " be iMproved
+set nocompatible               " be iMproved, don't worry about Vi compatibility 
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -69,7 +101,9 @@ Bundle 'gmarik/vundle'
 "Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Townk/vim-autoclose'
 "Bundle 'vim-scripts/Obvious-Mode' 
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'git://github.com/sjl/gundo.vim.git'
+Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 " Themes:
@@ -87,8 +121,8 @@ filetype plugin indent on     " required!
 " NOTE: comments after Bundle command are not allowed..
 
 
-" Basic usability stuff
-" =====================
+" Miscellaneous usability stuff
+" =============================
 
 " Detect filetype
 " filetype plugin on 
@@ -102,6 +136,30 @@ set whichwrap=b,s,<,>,[,]
 
 " When searching, wrap around the beginning/end of the file
 set wrapscan
+
+" When searching, ignore case, but try to be smart about it
+set ignorecase
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Incremental search, so you start searching by each character you type rather
+" than by strings
+set incsearch
+
+" Always show current position
+set ruler
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
 " Remember the cursor position in files
 if has("autocmd")
@@ -134,9 +192,16 @@ colorscheme solarized
 " Word Wrapping 
 " =============
 
-" Automatically hard wrap as you type and as you edit so you don't have to
-" constantly gq 
+" For information about formatting options, see :help fo-table
+
+" Automatically hard wrap everything as you type and as you edit so you don't
+" have to constantly gq 
 "set formatoptions+=a
+
+" Automatically wrap text, allowing formatting with "gq", automatically insert
+" the comment leader after hitting <Enter> in Insert mode, recognize numbered
+" lists, and don't break a line after a one-letter word.  
+set formatoptions=qrn1
 
 " Turn hard wrapped text into soft wrapped.
 " This command will join all lines within a range that are not separated
@@ -166,5 +231,8 @@ set spelllang=en_ca,en
 " insert point.  
 inoremap <C-l> <esc>[sz= 
 nnoremap <C-i> gi
+
+" Status Line
+" ===========
 
 
