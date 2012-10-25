@@ -50,6 +50,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Set <localleader> to <,>.  See Pandoc section for some ways this is used.
+map localleader = ","
+
 " Spell checking
 " When in insert mode, press C-l to see a menu for spell check fixes for the
 " nearest misspelled word to the left of the cursor, then press C-i to go back
@@ -99,11 +102,13 @@ Bundle 'gmarik/vundle'
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Townk/vim-autoclose'
 "Bundle 'vim-scripts/Obvious-Mode' 
+Bundle 'Townk/vim-autoclose'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'git://github.com/sjl/gundo.vim.git'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'vim-scripts/VOoM'
+Bundle 'vim-pandoc/vim-pandoc'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 " Themes:
@@ -172,6 +177,12 @@ set undodir=$HOME/.vim/undo " where to save undo histories  Note: Make sure this
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 
+" Make tab completion more bash-like.  First tab completes as much as
+" possible, second gives a list, third and later tabs cycle through completion
+" options
+set wildmode=longest,list,full
+set wildmenu
+
 " Themes and colours
 " ==================
 
@@ -235,4 +246,38 @@ nnoremap <C-i> gi
 " Status Line
 " ===========
 
+" Pandoc Options
+" ==============
 
+" See the README at <https://github.com/vim-pandoc/vim-pandoc> for more info.
+
+" Use pandoc-hard-wrapping instead of the default soft wrapping
+let g:pandoc_use_hard_wraps = 1
+
+" Pandoc Keybindings
+
+" Note: <localleader> is set to ,
+" Note: ft must be pandoc (if it's not, use `:set ft=pandoc`)
+"
+" <localleader>www will open a link in your default browser when used over
+" a link.
+"
+" <localleader>gr to jump from a link to its definition
+" <localleader>br to jump back from a definition to its link
+"
+" <localleader>nr to create a new reference link.  Then you can use `,br` to
+" jump back.
+
+" VoOM
+" ====
+
+" See the readme at <https://github.com/vim-scripts/VOoM> for detailed
+" workings
+"
+" :Voom [type: optional] creates a tree buffer
+" Use Up, Left, Right, and Down to move around the nodes, Enter to select new
+" node
+" Tab cycles without selecting a node
+" Space expands/collapses a node without selecting it
+" <C-direction> to move node
+" You can see :Voomhelp for more info
