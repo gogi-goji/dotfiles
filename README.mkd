@@ -64,10 +64,10 @@ control, let's use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
 window manager I've become partial to on my netbook.  It looks for your config
 files in (I think) `$XDG_HOME/herbstluftwm/`.  So in order to keep all my
 editable config files here in this git repo, I use a symlink to point
-herbstluftwm in the right direction.  This includes conky configuration.
+herbstluftwm in the right direction.  This dir includes conky configuration.
 
     $ yaourt -S herbstluftwm-git conky
-    $ cp -R ~/dotfiles/herbstluftwm ~/.config/
+    $ ln -s ~/dotfiles/herbstluftwm/ ~/.config/herbstluftwm
 
 
 # Personal keymap #
