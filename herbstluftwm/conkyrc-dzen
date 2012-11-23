@@ -1,0 +1,34 @@
+#
+# ~/.config/herbstluftwm/conkyrc-dzen
+#
+
+#cpu_avg_samples 2
+#default_color white
+#default_outline_color white
+#default_shade_color white
+#net_avg_samples 2
+#no_buffers yes
+background no
+out_to_console yes
+update_interval 3
+#update_interval_on_battery 3
+use_spacer none
+#uppercase no
+
+# Output: [Battery] [cpu/ram/watts? (not enough room)] [Wifi] [Volume] [Date]
+# Note: I couldn't figure out how to pass $separator or $colors to dzen2,
+# so I put in the color values here by hand
+
+TEXT
+^bg()^fg(\#4F4F4F)| \
+^bg()^fg(\#ffffff)Battery: ^bg()^fg(\#ababab)${execi 15 bash /home/cam/scripts/status/battery.sh} \
+^bg()^fg(\#4F4F4F)| \
+^bg()^fg(\#ffffff)${if_existing /sys/class/net/wlan0/operstate up}WiFi: ^bg()^fg(\#ababab)${wireless_link_qual_perc wlan0}%\
+${else}${if_existing /sys/class/net/eth0/operstate up}Ethernet\
+${else}Not Connected${endif}${endif} \
+^bg()^fg(\#4F4F4F)| \
+^bg()^fg(\#ffffff)Volume: ^bg()^fg(\#ababab)${exec bash /home/cam/scripts/status/volume.sh} \
+^bg()^fg(\#4F4F4F)| \
+^bg()^fg(\#ababab)${time %a %b %e} ^bg()^fg(\#ffffff)${time %l:%M %p} \
+^bg()^fg(\#4F4F4F)| \
+

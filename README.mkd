@@ -6,10 +6,10 @@ Personal configuration files
 https://github.com/gogi-goji/dotfiles
 git@github.com:gogi-goji/dotfiles
 
-# Vim 
-===== 
+## Vim ##
+---------
 
-## Getting Started 
+### Getting Started ###
 
 First, install gvim.  The default vim package that Arch Linux comes with is
 really lightweight, and doesn't come with a graphical version, Python support
@@ -18,20 +18,20 @@ like.
 
 Vim checks for your user's config file first in ~/.vimrc, then checks for a
 global one in /etc/vimrc.  In order to keep things clean and under version
-control, use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
+control, let's use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
 
-## Plugins
+### Plugins ###
 * Vundle (takes care of all the rest of your plugins for you)
     * https://github.com/gmarik/vundle
     * Install vundle (as described in the README in the git repo)
     * in Vim, run :BundleInstall, and then Vim and your .vimrc will take care
       of everything else for you!
 
-##Spell Check
+### Spell Check ###
 * Install vim-spell-en (installed by default on Arch) 
 * The rest is handled by my .vimrc
 
-##Theme
+### Theme ###
 * Solarized 
     * http://ethanschoonover.com/solarized
     * my vimrc should take care of the theme thanks to Vundle.  However, when
@@ -40,12 +40,12 @@ control, use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
     * copy the colours here into your ~/.Xresources file:
       https://github.com/altercation/solarized/blob/master/xresources-colors-solarized/Xresources
 
-## Persistent Undo
+### Persistent Undo ###
 * My .vimrc takes care of most of this, but you need to make the undo directory
   yourself, as Vim will not do it for you.
     `$ mkdir ~/.vim/undo`
 
-##Using user environment with sudo
+### Using user environment with sudo ###
 * One potential problem with a quite customized setup with plugins is that your
   editor is quite dependant on your user's environment
 * This can be worked around with sudoedit
@@ -55,3 +55,37 @@ control, use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
     * Then, you can edit files with sudo privileges and your own user's
       environment with `$ sudoedit filename`.  This uses a tmp file, which it
       then writes when you're done.  
+
+
+# herbstluftwm #
+----------------
+
+[herbstluftwm](http://wwwcip.cs.fau.de/~re06huxa/herbstluftwm/) is the tiling
+window manager I've become partial to on my netbook.  It looks for your config
+files in (I think) `$XDG_HOME/herbstluftwm/`.  So in order to keep all my
+editable config files here in this git repo, I use a symlink to point
+herbstluftwm in the right direction.  This includes conky configuration.
+
+    $ yaourt -S herbstluftwm-git conky
+    $ cp -R ~/dotfiles/herbstluftwm ~/.config/
+
+
+# Personal keymap #
+-------------------
+
+I've made a personal keymap, us-personal, that's a slightly modified version of
+the standard us keyboard layout.  In it, I've remapped <Caps_Lock> to function
+as an additional Control key, while <Shift-Caps_Lock> still functions as Caps
+Lock.
+
+Copy the gziped file, `us-personal.map.gz` to
+`/usr/share/kbd/keymaps/i386/qwerty/` Test it out with `setxkbmap us-personal`,
+then add it to your `/etc/rc.conf`.  
+
+Note: In the future, I believe the place the keyboard map is now set
+system-wide in Arch Linux is `/etc/vconsole.conf`
+
+Note: Works fine in console with `# loadkeys`, but won't work in X.  Not sure
+why.
+
+
