@@ -39,7 +39,6 @@ control, let's use a symbolic link.  `ln -s ~/dotfiles/vimrc ~/.vimrc`
       about my .Xresources not messing things up.  
     * copy the colours here into your ~/.Xresources file:
       https://github.com/altercation/solarized/blob/master/xresources-colors-solarized/Xresources
-
 ### Persistent Undo ###
 * My .vimrc takes care of most of this, but you need to make the undo directory
   yourself, as Vim will not do it for you.
@@ -83,6 +82,13 @@ Then, create a symlink to the config file:
 
 You'll probably want xbindkeys to start automatically.  Ensure that in your 
 `~/.xinitrc`, you have `xbindkeys &`
+
+My netbook xbindkeys config relies on
+[Light](https://aur.archlinux.org/packages/light/) and setpci, both of which
+require sudo to run.  To allow them to run without requiring a password for
+users in the group wheel, use `# visudo` and add the line:
+
+    %wheel ALL = NOPASSWD: /usr/bin/light, /usr/sbin/setpci
 
 
 # Personal keymap #
