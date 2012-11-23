@@ -15,7 +15,13 @@ update_interval 3
 use_spacer none
 #uppercase no
 
-# Output: [Battery] [cpu/ram/watts? (not enough room)] [Wifi] [Volume] [Date]
+# Output: Battery | Wifi | Volume | Date/Time
+
+# Todo: I want to add some CPU information (clock speed, %usage), Ram %usage,
+# Power draw in Watts, and indicators for Caps Lock, Num Lock, and touchpad
+# disable, but I'm not sure where to put them.  Maybe indicators between volume
+# and date, and the rest in a second conky floating on the desktop?
+
 # Note: I couldn't figure out how to pass $separator or $colors to dzen2,
 # so I put in the color values here by hand
 
