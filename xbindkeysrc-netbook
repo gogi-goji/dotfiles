@@ -1,0 +1,89 @@
+# xbindkeysrc (netbook) -- ~/.xbindkeysrc
+# =======================================
+#
+# This file is under version control in my 
+# [dotfiles git repo](https://github.com/gogi-goji/dotfiles).  
+#
+# To use this:
+# 
+#     $ pacman -S xbindkeys
+#     $ ln -s ~/dotfiles/xbindkeys-netbook ~/.xbindkeyrc
+
+
+# Backlight control
+# -----------------
+
+# Increase backlight by 10% 
+# <Fn-Up>
+"sudo /usr/bin/light -aq 10"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
+
+# Decrease backlight by 10% 
+# <Fn-Down>
+"sudo /usr/bin/light -sq 10"
+    m:0x0 + c:232
+    XF86MonBrightnessDown
+
+# Use setpci to set the backlight to a full 100%
+# <Fn-F5>
+"sudo /usr/sbin/setpci -s 00:02.1 F4.B=FF && sudo /usr/bin/light -q 100"
+    m:0x0 + c:156
+    XF86Launch1
+
+# Set the backlight to 30%
+# <Fn-F4>
+"sudo /usr/sbin/setpci -s 00:02.1 F4.B=FF && sudo /usr/bin/light -q 30"
+    m:0x0 + c:235
+    XF86Display
+
+
+# Volume control
+# --------------
+
+# Increase the volume by 1dB
+# <Fn-Right>
+"amixer set Master 1+"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+
+# Decrease the volume by 1dB
+# <Fn-Left>
+"amixer set Master 1-"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+
+# Toggle mute
+# <Fn-F6>
+"amixer set Master toggle"
+    m:0x0 + c:121
+    XF86AudioMute
+
+
+# Wireless control
+# ----------------
+
+# Toggle wifi on/off
+# <Fn-F9>
+#"command goes here"
+#    m:0x0 + c:246
+#    XF86WLAN
+#
+# Note: rfkill can stop wifi, but on kernel 3.6.2 at least, it can't bring it
+#       back up (it becomes hardware blocked when you try to unblock it), so
+#       you have to reboot.
+
+
+# Touchpad control
+# ----------------
+
+# Toggle the trackpad on/off
+# <Fn-F10>
+# Note: X seems to take care of this itself.
+
+
+# Number pad
+# ----------
+
+# Press <Fn-F11> to toggle the number pad on and off.  When on, the blue Fn key
+# number pad will work without any key combos, and Fn-key will type the letter.

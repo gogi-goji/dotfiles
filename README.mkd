@@ -70,6 +70,21 @@ herbstluftwm in the right direction.  This dir includes conky configuration.
     $ ln -s ~/dotfiles/herbstluftwm/ ~/.config/herbstluftwm
 
 
+# xbindkeys #
+-------------
+
+Start by installing xbindkeys from the official repos:
+
+    $ yaourt -S xbindkeys
+
+Then, create a symlink to the config file:
+
+    $ ln -s ~/dotfiles/xbindkeysrc-netbook ~/.xbindkeysrc
+
+You'll probably want xbindkeys to start automatically.  Ensure that in your 
+`~/.xinitrc`, you have `xbindkeys &`
+
+
 # Personal keymap #
 -------------------
 
