@@ -68,6 +68,9 @@ herbstluftwm in the right direction.  This dir includes conky configuration.
     $ yaourt -S herbstluftwm-git conky
     $ ln -s ~/dotfiles/herbstluftwm/ ~/.config/herbstluftwm
 
+Note that my conky config relies upon my
+[scripts](https://github.com/gogi-goji/scripts) being installed in ~/scripts.
+
 
 # xbindkeys #
 -------------
