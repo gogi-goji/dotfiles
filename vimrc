@@ -91,40 +91,40 @@ map localleader = ","
 set nocompatible               " be iMproved, don't worry about Vi compatibility 
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" My Bundles here:
+" My Plugin here:
 " original repos on github
-"Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'vim-scripts/Obvious-Mode' 
-Bundle 'Townk/vim-autoclose'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'git://github.com/sjl/gundo.vim.git'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
-Bundle 'vim-scripts/VOoM'
-Bundle 'vim-pandoc/vim-pandoc'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'Lokaltog/vim-easymotion'
+Plugin 'bling/vim-airline'
+Plugin 'Townk/vim-autoclose'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'git://github.com/sjl/gundo.vim.git'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'vim-scripts/VOoM'
+"Plugin 'vim-pandoc/vim-pandoc'
 " non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " Themes:
-Bundle 'altercation/vim-colors-solarized'
-
+Plugin 'altercation/vim-colors-solarized'
+call vundle#end()             " required
 filetype plugin indent on     " required!
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-
+" Put your non-Plugin stuff after this line
 
 " Miscellaneous usability stuff
 " =============================
@@ -189,9 +189,12 @@ set wildmenu
 " Solarized
 " http://ethanschoonover.com/solarized/vim-colors-solarized
 syntax enable
-set background=dark
-"set background=light
+"set background=dark
+set background=light
 colorscheme solarized
+
+" set guifont=Monaco:h12
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
 
 " Note: If running out of a terminal, it's probably a good idea to use the
 " Solarized Xdefaults/Xresources colours to make sure there's nothing stupid
@@ -245,6 +248,12 @@ nnoremap <C-i> gi
 
 " Status Line
 " ===========
+
+" Airline is always visible
+set laststatus=2
+
+" Use symbols from patched powerline fonts
+let g:airline_powerline_fonts = 1
 
 " Pandoc Options
 " ==============
