@@ -66,6 +66,10 @@ map localleader = ","
 " I'm using the plugin vim-numbertoggle for this functionality.  For more
 " information see:
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+" 
+" Have a highlighted column at character 80 so you can see if the lines are
+" too long
+set colorcolumn=80
 
 " NerdCommenter
 " 
