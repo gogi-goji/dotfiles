@@ -37,10 +37,6 @@ set showmode
 " Note: requires Gundo plugin (handled by Vundle, see below)
 nnoremap <F5> :GundoToggle<CR>
 
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
 " Start scrolling before the cursor hits the bottom/top of the page
 set scrolloff=4
 
@@ -56,8 +52,8 @@ map localleader = ","
 " Spell checking
 " When in insert mode, press C-l to see a menu for spell check fixes for the
 " nearest misspelled word to the left of the cursor, then press C-i to go back
-" to your last insert point.  
-" Code is in spell checking section, just described here for reference. 
+" to your last insert point.
+" Code is in spell checking section, just described here for reference.
 
 " Relative line numbers
 "
@@ -66,13 +62,13 @@ map localleader = ","
 " I'm using the plugin vim-numbertoggle for this functionality.  For more
 " information see:
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
-" 
+"
 " Have a highlighted column at character 80 so you can see if the lines are
 " too long
 set colorcolumn=80
 
 " NerdCommenter
-" 
+"
 " [count]<leader>c<space> to toggle comments on and off.
 " <leader>c$ Comments the current line from the cursor to the EOL
 " <leader>cA Insert a comment and go into insert mode at the end of the line
@@ -92,15 +88,15 @@ set colorcolumn=80
 " mess around with all of that yourself.  See the Github repo for more
 " specific information.  The following stuff is all Vundle configuration
 " stuff.
-set nocompatible               " be iMproved, don't worry about Vi compatibility 
+set nocompatible               " be iMproved, don't worry about Vi compatibility
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim
+" required!
+Plugin 'gmarik/Vundle.vim'
 
 " My Plugin here:
 " original repos on github
@@ -134,7 +130,7 @@ filetype plugin indent on     " required!
 " =============================
 
 " Detect filetype
-" filetype plugin on 
+" filetype plugin on
 " Set at the end of Vundle section
 
 " Show line numbers
@@ -163,12 +159,25 @@ set ruler
 " Use spaces instead of tabs
 set expandtab
 
-" Be smart when using tabs ;)
+" Be smart when using tabs
 set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+" Swap the movements of j/gj and k/gk.  Now j/k move up/down visual lines, and
+" gj/gk move up/down numbered lines.
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
+" Make saving more forgiving if you hold Shift for too long
+command WQ wq
+command Wq wq
+command W w
+command Q q
 
 " Remember the cursor position in files
 if has("autocmd")
@@ -187,6 +196,20 @@ set undoreload=10000        " number of lines to save for undo
 set wildmode=longest,list,full
 set wildmenu
 
+" Soft word wrapping in markdown, TeX, and text files
+autocmd BufRead,BufNewFile *.mkd,*.tex,*.txt set wrap linebreak nolist
+
+" Remove whitespace when saving
+" From
+" https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
 " Themes and colours
 " ==================
 
@@ -202,23 +225,23 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
 
 " Note: If running out of a terminal, it's probably a good idea to use the
 " Solarized Xdefaults/Xresources colours to make sure there's nothing stupid
-" going on.  
+" going on.
 " Grab the Xresources colours here:
 " https://github.com/altercation/solarized/blob/master/xresources-colors-solarized/Xresources
 
 
-" Word Wrapping 
+" Word Wrapping
 " =============
 
 " For information about formatting options, see :help fo-table
 
 " Automatically hard wrap everything as you type and as you edit so you don't
-" have to constantly gq 
+" have to constantly gq
 "set formatoptions+=a
 
 " Automatically wrap text, allowing formatting with "gq", automatically insert
 " the comment leader after hitting <Enter> in Insert mode, recognize numbered
-" lists, and don't break a line after a one-letter word.  
+" lists, and don't break a line after a one-letter word.
 set formatoptions=qrn1
 
 " Turn hard wrapped text into soft wrapped.
@@ -246,8 +269,8 @@ set spelllang=en_ca,en
 " The key combo [s takes you to the nearest misspelled word to the left of the
 " cursor, and then z= gives you a list of words to choose from.  This rebinds
 " C-l to do that when you're in insert mode, then C-i to go back to the last
-" insert point.  
-inoremap <C-l> <esc>[sz= 
+" insert point.
+inoremap <C-l> <esc>[sz=
 nnoremap <C-i> gi
 
 " Status Line
@@ -258,6 +281,28 @@ set laststatus=2
 
 " Use symbols from patched powerline fonts
 let g:airline_powerline_fonts = 1
+
+" Turn off the trailing space warning
+let g:airline_detect_whitespace = 0
+
+" Word counter in markdown files
+" Source:
+" https://stackoverflow.com/questions/114431/fast-word-count-function-in-vim
+function! WordCount()
+  let s:old_status = v:statusmsg
+  let position = getpos(".")
+  exe ":silent normal g\<c-g>"
+  let stat = v:statusmsg
+  let s:word_count = 0
+  if stat != '--No lines in buffer--'
+    let s:word_count = str2nr(split(v:statusmsg)[11])
+    let v:statusmsg = s:old_status
+  end
+  call setpos('.', position)
+  return s:word_count
+endfunction
+
+autocmd BufRead,BufNewFile *.mkd let g:airline_section_y = '%{WordCount()} words'
 
 " Pandoc Options
 " ==============
