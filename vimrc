@@ -95,7 +95,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
+" <<<<<<< Updated upstream
 " required!
+" =======
+" required!
+" >>>>>>> Stashed changes
 Plugin 'gmarik/Vundle.vim'
 
 " My Plugin here:
@@ -216,12 +220,15 @@ autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " Solarized
 " http://ethanschoonover.com/solarized/vim-colors-solarized
 syntax enable
-"set background=dark
-set background=light
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
 colorscheme solarized
 
 " set guifont=Monaco:h12
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
 
 " Note: If running out of a terminal, it's probably a good idea to use the
 " Solarized Xdefaults/Xresources colours to make sure there's nothing stupid
